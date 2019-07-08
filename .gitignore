@@ -1,3 +1,4 @@
+.vscode
 __pycache__
 db.sqlite3
 django_basic/django_venv

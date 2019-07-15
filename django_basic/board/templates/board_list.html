@@ -3,8 +3,8 @@
 {% block contents %}
 <div class="row mt-5">
     <div class="col-12">
-        <table class="table">
-            <thead>
+        <table class="table table-light">
+            <thead class="thead-light">
                 <tr>
                     <th>#</th>
                     <th>제목</th>
@@ -12,13 +12,22 @@
                     <th>일시</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-dark">
+                {% for board in boards %}
                 <tr>
-                    <th>1</th>
-                    <td>제목 테스트입니다.</td>
+                    <th>{{ board.id }}</th>
+                    <td>{{ board.title }}</td>
+                    <td>{{ board.writer }}</td>
+                    <td>{{ board.registered_dttm }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-primary">글쓰기</button>
     </div>
 </div>
 

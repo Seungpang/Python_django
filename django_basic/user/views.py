@@ -5,13 +5,7 @@ from .models import User
 from .forms import LoginForm
 
 def home(request):
-    user_id = request.session.get('user')
-
-    if user_id:
-        user = User.objects.get(pk=user_id)
-        return HttpResponse(user.username)
-
-    return HttpResponse('Home!')
+    return render(request, 'home.html')
 
 def logout(request):
     if request.session.get('user'):

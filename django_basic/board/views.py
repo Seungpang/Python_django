@@ -1,16 +1,41 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.http import Http404, HttpResponse, JsonResponse
 from user.models import User
 from tag.models import Tag
 from .models import Board
 from .forms import BoardForm
+from django.views.decorators.csrf import csrf_exempt
+
+def api_board_detail(request, pk):
+    try:
+        board = Board.objects.get(pk=pk)
+    except Board.DoesNotExist:
+        raise JsonResponse({}, status=404)
+
+    if request.method == 'GET':
+        return JsonResponse({
+            'title': board.title,
+            'contents': board.contents,
+            'writer': board.writer.username,
+            'registered_dttm': board.registered_dttm
+        })
+    else:
+        return JsonResponse({}, status=400)
+
+@csrf_exempt
+def api_board_write(request):
+    if request.method == 'POST':
+        print(request.POST)
+        return JsonResponse({})
+    return JsonResponse({}, status=400)
+
 
 def board_detail(request, pk):
     try:
         board = Board.objects.get(pk=pk)
     except Board.DoesNotExist:
-        raise Http404('게시글을 찾을 수 없습니다.')
+        raise Http404('게시글을 찾을 수 없습니다')
 
     return render(request, 'board_detail.html', {'board': board})
 

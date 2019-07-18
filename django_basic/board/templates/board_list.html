@@ -1,5 +1,32 @@
 {% extends "base.html"%}
-
+{% block scripts %}
+<script>
+function get_and_modal_detail(board_id){
+  $.ajax({
+    url: "/board/api/detail/" + board_id,
+    type: "GET",
+    success: function (result){
+      
+      $("#detail_writer").text(result.writer);
+      $("#detail_title").text(result.title);
+      
+      $("#detail_contents").text(result.contents);
+      $("#detail_registered_dttm").text(result.registered_dttm);
+      $("#detailModal").modal('show');
+      console.log(result);
+    },
+    error: function (result){
+      console.log('error');
+    },
+    complete: function (result){
+      console.log('complete');
+    }
+  });
+}
+  $(document).ready(function() {
+  });
+</script>
+{% endblock %}
 {% block contents %}
 <div class="row mt-5">
     <div class="col-12">
@@ -14,7 +41,7 @@
             </thead>
             <tbody class="text-dark">
                 {% for board in boards %}
-                <tr onclick="location.href='/board/detail/{{ board.id }}'">
+                <tr onclick="get_and_modal_detail({{ board.id }});">
                     <th>{{ board.id }}</th>
                     <td>{{ board.title }}</td>
                     <td>{{ board.writer }}</td>
@@ -59,6 +86,84 @@
         <button class="btn btn-primary" onclick="location.href='/board/write/'">글쓰기</button>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detail_title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <span id="detail_registered_dttm"></span>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col">작성자</div>
+          <div class="col">
+            <span id="detail_writer"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span id="detail_contents"></span>
+          </div>
+        </div>    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detail_title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-5">
+          <div class="col-12">
+            <form method="POST" action=".">
+              <div class="form-group">
+                <label for="id_title">제목</label>
+                <input type="text" class="form-control" id= "id_title" name="title" />
+                <textarea class="form-control" name="cotents" placeholder="내용"></textarea>
+              </div>
+              <span style="color: red" id="create_error"></span>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">글쓰기</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/board/list/'">돌아가기</button>
+      </div>      
+    </div>
+  </div>
+</div>
 {% endblock %}
+

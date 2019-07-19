@@ -2,14 +2,14 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
 from .models import Product
-from .forms import RegisterForm
+from .forms import RegisterFrom
 
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'
     context_object_name = 'product_list'
 
-class ProductCreate(FromView):
+class ProductCreate(FormView):
     template_name = 'register_product.html'
-    form_class = RegisterForm
+    form_class = RegisterFrom
     success_url = '/product/'

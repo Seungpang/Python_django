@@ -7,7 +7,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='상품가격')
     description = models.TextField(verbose_name='상품설명')
     stock = models.IntegerField(verbose_name='재고')
-    register_date = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
+    register_dttm = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
 
     def __str__(self):
         return self.name

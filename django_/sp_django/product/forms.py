@@ -31,11 +31,7 @@ class RegisterFrom(forms.Form):
         description = cleaned_data.get('description')
         stock = cleaned_data.get('stock')
 
-        if name and price and description and stock:
-            product = Product(
-                name=name,
-                price=price,
-                description=description,
-                stock=stock
-            )
-            product.save()
+        if not (name and price and description and stock):
+            self.add_error('name', '값이 없습니다')
+            self.add_error('price', '값이 없습니다')
+ 

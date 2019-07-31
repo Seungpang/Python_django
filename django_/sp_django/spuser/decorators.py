@@ -11,7 +11,7 @@ def login_required(function):
     return wrap
 
 
-
+    
 def admin_required(function):
     def wrap(request, *args, **kwargs):
         user = request.session.get('user')

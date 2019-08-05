@@ -32,7 +32,6 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetail.as_view()),
     path('order/create/', OrderCreate.as_view()),
     path('order/', OrderList.as_view()),
-
     path('api/product/', ProductListAPI.as_view()),
     path('api/product/<int:pk>/', ProductDetailAPI.as_view()),
 ]

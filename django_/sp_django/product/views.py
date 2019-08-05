@@ -61,3 +61,4 @@ class ProductDetail(DetailView):
         context['form'] = OrderForm()
         return context
         
+

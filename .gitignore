@@ -3,3 +3,8 @@ __pycache__
 db.sqlite3
 django_basic/django_venv
 django_/venv
+env
+**/*.pyc
+**/__pycache__
+media
+static

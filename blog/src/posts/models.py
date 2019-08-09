@@ -41,3 +41,15 @@ class Post(models.Model):
             'id': self.id
     })
     
+    @property
+    def get_commnets(self):
+        return self.commnet.all().order_by('-timestamp')
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    post = models.ForeignKey(Post, related_name='commnet', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username

@@ -40,7 +40,17 @@ class Post(models.Model):
         return reverse("post-detail", kwargs={
             'id': self.id
     })
-    
+ 
+    def get_update_url(self):
+        return reverse("post-update", kwargs={
+            'id': self.id
+    })
+
+    def get_delete_url(self):
+        return reverse("post-delete", kwargs={
+            'id': self.id
+    })
+
     @property
     def get_commnets(self):
         return self.commnet.all().order_by('-timestamp')

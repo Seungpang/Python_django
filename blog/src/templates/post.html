@@ -92,6 +92,8 @@
                     </div>
                   </form>
                 </div>
+                {% else %}
+                <a href="{% url 'account_login'%}" class="btn btn-primary">로그인 후 댓글작성</a>
                 {% endif %}
               </div>
             </div>

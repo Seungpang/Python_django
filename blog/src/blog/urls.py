@@ -4,14 +4,24 @@ from django.contrib import admin
 from django.urls import path, include
 
 from posts.views import (
-    index, blog, post, search,
-    post_create, post_update, post_delete)
+    index,
+    blog, 
+    post, 
+    search,
+    post_create, 
+    post_update, 
+    post_delete,
+    IndexView,
+)
+from marketing.views import email_list_signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    # path('', index, name='home'),
+    path('', IndexView.as_view(), name='home'),
     path('blog/', blog, name='post-list'),
     path('search/', search, name='search'),
+    path('subscribe/', email_list_signup, name='subscribe'),
     path('create/', post_create, name='post-create'),
     path('post/<id>/', post, name='post-detail'),
     path('post/<id>/update/', post_update, name='post-update'),

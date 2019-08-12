@@ -32,7 +32,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    post = models.ForeignKey('Post', related_name='commnet', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', related_name='comment', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username

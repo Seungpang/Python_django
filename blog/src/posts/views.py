@@ -27,7 +27,7 @@ class SearchView(View):
             queryset = queryset.filter(
                 Q(title__icontains=query) |
                 Q(overview__icontains=query)
-            ).distinct()
+            ).distinct() #distinct 중복된 값을 하나로만 표시하기 위해 distinct()메서드 사용
         context = {
             'queryset': queryset
         }

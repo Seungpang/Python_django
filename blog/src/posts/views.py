@@ -124,7 +124,7 @@ def post_list(request):
     try:
         paginated_queryset = paginator.page(page)
     except PageNotAnInteger:
-        paginated_queryset = paginator.page(1)
+        paginated_queryset = paginator.page(2)
     except EmptyPage:
         paginated_queryset = paginator.page(paginator.num_pages)
 
